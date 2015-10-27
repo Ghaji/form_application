@@ -1,0 +1,128 @@
+/* CSS Document */
+/*
+
+body, html {
+scrollbar-arrow-color: #ffffff;
+scrollbar-base-color: black;
+scrollbar-darkshadow-color: black;
+scrollbar-face-color: #006699;
+scrollbar-highlight-color: #ffffff;
+scrollbar-shadow-color: #cccccc;
+background-color : #ffffff;
+font-family : Tahoma, Verdana, Arial, Helvetica, sans-serif;
+font-size : 11px;
+color : #000000;
+}
+
+a:hover {font-size: 11px; font-family: tahoma,verdana,arial,helvetica,sans-serif; color: darkblue; text-decoration: underline; font-weight: normal;}
+a:link {font-size: 11px; font-family: tahoma,verdana,arial,helvetica,sans-serif; color: #990000; text-decoration:underline; font-weight: normal;}
+a:visited {font-size: 11px; font-family: tahoma,verdana,arial,helvetica,sans-serif; color: #6699CC; text-decoration: underline; font-weight: normal;}
+a:active {font-size: 11px; font-family: tahoma,verdana,arial,helvetica,sans-serif; color: #333333; text-decoration:underline; font-weight: normal;}
+
+.head{
+	height:3em;
+	color: #FFFFFF;
+	font-size : 18px;
+	border-left:#000000 1px solid;
+	border-right:#000000 1px solid;
+	border-top:#000000 1px solid;
+	font-weight:bold;
+	background:url(formbg4.gif) repeat-x left top #2B9DFF;
+	
+}
+
+.main{
+border-left:#000000 1px solid;
+	border-right:#000000 1px solid;	
+}
+
+input,textarea,select {
+	font-family: Tahoma, Verdana, Arial;
+	font-size: 11px;
+	color: #006699;
+	border: 1px ridge #72A4D5;
+	background-color: #F4F4F7;
+}
+
+.butn{
+cursor:pointer;
+border:outset 1px #ccc;
+background:#999;
+color:#666;
+font-weight:bold;
+font-size:11px;
+padding: 1px 2px;
+background:url(formbg3.gif) repeat-x left top;
+
+}
+*/
+.b_white{
+border-bottom: 1px solid #FFFFFF;
+
+}
+
+.spacecell{
+padding-top:10px;
+}
+
+
+.upcas{
+text-transform:uppercase;
+}
+
+#non{
+text-decoration:none;
+}
+
+.warn{
+	font-weight:bold;
+	color: red;
+}
+
+.mylist li{
+	padding-top: 10px ;
+}
+
+
+.fadedBlue {
+	FONT-WEIGHT: bold; COLOR: #ffffff; BACKGROUND-COLOR: #173042 ;
+	background-image:url(images/ujshield.gif) ;
+	background-repeat:no-repeat ; background-position: left center ;
+	padding-left: 100px ;	
+}
+.bord{
+	border: solid 1px #173042
+}
+.botbg {
+	BACKGROUND: url(images/bottombackground.gif) repeat-x
+}
+.stylelab{
+	border-bottom:#FF0000 solid 1px ;
+	text-align:left ;
+	font-size: small ;
+}
+-->
+
+
+.contact-us {
+	max-width: 800px;
+	padding: 20px 30px;
+	margin: 0 auto 20px;
+	background-color: #fff;
+	border-radius: 8px;
+}	
+
+.contact-us .control-label {
+  float: left;
+  width: 90px;
+  padding-top: 5px;
+  text-align: none;
+}
+
+.contact-us .controls {
+  *display: inline-block;
+  *padding-left: 20px;
+  margin-left: 50px;
+  *margin-left: 0;
+}
+

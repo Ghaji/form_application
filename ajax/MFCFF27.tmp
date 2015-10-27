@@ -1,0 +1,134 @@
+<?php
+	require_once('../inc/initialize.php');
+
+	$transcript_upload_msg = 0;
+
+	$empty_file_msg = 0;
+	$counter = 1;
+	foreach($_FILES as $key => $value){
+		if(!empty($value) && $value["size"] != 0) {
+			print_r($value);
+			$sql = "SELECT * FROM files WHERE applicant_id=" . $session->applicant_id .  " AND caption='Document ".$counter."'";
+			print_r($sql);
+			$result = Files::find_by_sql($sql);
+			$result = array_shift($result);
+			$degree = new Files();
+			echo "<hr>";
+		} else {
+			$empty_file_msg += $counter;
+		}
+		$counter++;
+	}
+	echo $empty_file_msg;
+	die();
+	/*Attach Degree Certificate*/
+	if(!empty($_FILES['attach_degree_certificate']))
+		{
+			$degree = new Files();
+		
+			/*find file record for degree certificate*/
+			$sql_deg_upload_file = "SELECT * FROM files WHERE applicant_id=" . $session->applicant_id .  " AND caption='Degree Certificate'";
+			$result_deg_upload_file = Files::find_by_sql($sql_deg_upload_file);
+			
+			foreach($result_deg_upload_file as $row):
+				$deg_file_id = $row->file_id;
+				$deg_filename = $row->filename;
+			endforeach;
+
+			
+			$degree->upload_dir = "documents".DS."certificates";
+
+			if(!empty($deg_file_id) && !empty($_FILES['attach_degree_certificate']['name']))
+			{
+				
+				$degree->file_id = $deg_file_id;
+				
+				unlink(SITE_ROOT.DS.$degree->upload_dir.DS.$deg_filename);
+			}
+	
+			$arrayfiledetails = explode('.', $_FILES['attach_degree_certificate']['name']);
+			$extension = $arrayfiledetails[sizeof($arrayfiledetails)-1];
+			$_FILES['attach_degree_certificate']['name'] = $session->applicant_id.'-degree-certificate.'.$extension;
+			
+			/*Attach Degree Certificate*/
+			if($degree->attach_file($_FILES['attach_degree_certificate']))
+			{
+				$degree->caption = 'Degree Certificate';
+				$degree->applicant_id = $session->applicant_id;
+				
+				if($degree->save())
+				{
+					$degree_upload_msg = 1;
+					
+					/*Attach Transcript*/
+					if(!empty($_FILES['attach_transcript']))
+						{
+							$transcript = new Files();
+							$transcript->upload_dir = "documents".DS."transcripts";
+							
+							/*find file record for degree transcript*/
+							$sql_trans_upload_file = "SELECT * FROM files WHERE applicant_id=" . $session->applicant_id .  " AND caption='Degree Transcript'";
+							$result_trans_upload_file = Files::find_by_sql($sql_trans_upload_file);
+							
+							foreach($result_trans_upload_file as $row):
+								$trans_file_id = $row->file_id;
+								$trans_filename = $row->filename;
+							endforeach;
+											
+							if(!empty($trans_file_id) && !empty($_FILES['attach_transcript']['name']))
+							{
+								$transcript->file_id = $trans_file_id;
+						
+								unlink(SITE_ROOT.DS.$transcript->upload_dir.DS.$trans_filename);
+							}
+					
+							$arrayfiledetails = explode('.', $_FILES['attach_transcript']['name']);
+						
+							$extension = $arrayfiledetails[sizeof($arrayfiledetails)-1];
+						
+							$_FILES['attach_transcript']['name'] = $session->applicant_id.'-degree-transcript.'.$extension;
+							
+							if($transcript->attach_file($_FILES['attach_transcript']))
+							{
+								$transcript->caption = 'Degree Transcript';
+								$transcript->applicant_id = $session->applicant_id;
+								
+								if($transcript->save())
+								{
+									$transcript_upload_msg = 1;
+								}
+							}
+							else {
+									sleep(2);
+									echo "<table>";
+									echo '<h4 class="alert alert-error"><i class="iconic-o-x" style="color: red"></i> Error!</h4>';
+									echo '<hr>';
+									echo "<tr><td>You attached an incorrect file, please ensure that the degree transcript you are uploading is in doc or pdf format.<br>Also ensure that each file is not more than 2MB</td></tr>";
+									echo "</table>";
+								}
+						}
+				}
+			}
+			else {
+					sleep(2);
+					echo "<table>";
+					echo '<h4 class="alert alert-error"><i class="iconic-o-x" style="color: red"></i> Error!</h4>';
+					echo '<hr>';
+					echo "<tr><td>You attached an incorrect file, please ensure that the degree transcript you are uploading is in doc or pdf format.<br>Also ensure that each file is not more than 2MB</td></tr>";
+					echo "</table>";
+				}
+		}
+
+	/*User Feedback*/
+	echo "<table>";
+	if($transcript_upload_msg == 1 && $degree_upload_msg == 1){
+		$user = new User();
+		$user->applicant_id = $session->applicant_id;
+		$user->updateProgress('H');
+		sleep(2);
+		echo '<h4 class="alert alert-success"><i class="iconic-o-check" style="color: #51A351"></i> Success</h4>';
+		echo '<hr>';
+		echo "<tr><td>You have successfully saved your certificate and transcript.</td></tr>";
+	}
+	echo "</table>";
+?>

@@ -1,0 +1,37 @@
+@charset "UTF-8";
+/*
+ * jQuery File Upload Plugin CSS Example 1.0.1
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2012, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+
+body{
+  padding-top: 0px;
+}
+
+
+#image {
+/* the image you want to 'watermark' */
+height: 500px; /* or whatever, equal to the image you want 'watermarked' */
+width: 530px; /* as above */
+background-image: url(images/background_images.jpg);
+background-position: center;
+background-repeat: no-repeat;
+position: relative;
+}
+
+#image img {
+/* the actual 'watermark' */
+position: fixed;
+top: 230px; /* or whatever */
+right: 600px; /* or whatever, position according to taste */
+opacity: 0.5; /* Firefox, Chrome, Safari, Opera, IE >= 9 (preview) */
+filter:alpha(opacity=500); /* for <= IE 8 */
+}
+
+/*style="background-image:url(images/background_images.jpg); background-repeat:no-repeat; background-position:center;"*/

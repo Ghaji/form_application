@@ -1,0 +1,35 @@
+body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+	  .tb{
+  border-radius: 2px 2px 2px 2px;
+  box-shadow:2px 2px 2px 2px rgba(5, 10, 30,.2);}
+  
+.table-list{
+	font-family: verdana;
+	font-size: 12px;
+	border: 1px solid #EAEAEA;
+	padding: 2px;
+}
+.table-list th{
+	background: #EDF2F6;
+    border-bottom: 1px dotted #DDDDDD;
+    color: #444444;
+    font-size: 12px;
+    font-weight: normal !important;
+    height: 28px;
+    line-height: 28px;
+    padding-left: 5px;
+    text-align: left;
+}
+.table-list td{
+    border-bottom: 1px dotted #EAEAEA;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    height: 28px;
+    padding: 5px;
+    text-align: left;
+}
+.table-list tr:hover{
+	background: #E3F3F9;
+}
